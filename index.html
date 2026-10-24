@@ -1,0 +1,403 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b09">
+  <meta name="description" content="ویترین ایران؛ بستری برای معرفی فروشگاه‌ها و محصولات ایرانی">
+  <title>ویترین ایران | بازار آنلاین ایران</title>
+  <style>
+    :root {
+      --bg: #080b09;
+      --panel: #111713;
+      --green: #39ff88;
+      --text: #f4fff7;
+      --muted: #a0afa5;
+      --border: #26382d;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.9;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(8, 11, 9, .95);
+    }
+
+    nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      padding: 12px 0;
+    }
+
+    .logo {
+      color: var(--green);
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .logo small {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--muted);
+      direction: ltr;
+      text-align: right;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a:hover { color: var(--green); }
+
+    .button {
+      display: inline-block;
+      border: 1px solid var(--green);
+      padding: 9px 17px;
+      border-radius: 9px;
+      color: var(--green);
+      background: transparent;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .button.primary {
+      color: #061109;
+      background: var(--green);
+      font-weight: bold;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 85px 0 65px;
+      background:
+        radial-gradient(ellipse at 50% 0%, #143522 0%, transparent 65%);
+    }
+
+    .eyebrow {
+      color: var(--green);
+      font-size: 13px;
+      letter-spacing: 2px;
+    }
+
+    h1 {
+      font-size: clamp(32px, 6vw, 58px);
+      line-height: 1.5;
+      margin: 15px 0;
+    }
+
+    h1 span { color: var(--green); }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 620px;
+      margin: 0 auto 28px;
+    }
+
+    .search {
+      display: flex;
+      gap: 10px;
+      max-width: 650px;
+      margin: 30px auto 0;
+    }
+
+    input, select {
+      min-width: 0;
+      width: 100%;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: var(--panel);
+      color: var(--text);
+      font: inherit;
+    }
+
+    section { padding: 48px 0; }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+
+    h2 { margin: 0; font-size: 25px; }
+
+    .muted { color: var(--muted); }
+
+    .categories, .stores {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .category, .store {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      transition: .2s;
+    }
+
+    .category:hover, .store:hover {
+      border-color: var(--green);
+      transform: translateY(-3px);
+    }
+
+    .category .emoji { font-size: 30px; }
+
+    .category h3, .store h3 {
+      margin: 8px 0 3px;
+      font-size: 17px;
+    }
+
+    .category p, .store p {
+      color: var(--muted);
+      margin: 0;
+      font-size: 13px;
+    }
+
+    .store-symbol {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: #193523;
+      color: var(--green);
+      font-size: 23px;
+    }
+
+    .empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      color: var(--muted);
+      padding: 35px;
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+    }
+
+    .seller {
+      padding: 32px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(110deg, #112419, #101511);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .seller h2 { margin-bottom: 8px; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      margin-top: 35px;
+      padding: 25px 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 760px) {
+      .categories, .stores {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .search { flex-direction: column; }
+      .hero { padding-top: 55px; }
+      .nav-links { gap: 12px; }
+    }
+
+    @media (max-width: 380px) {
+      .categories, .stores {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#" class="logo">
+          ویترین ایران
+          <small>VITRIN IRAN</small>
+        </a>
+        <div class="nav-links">
+          <a href="#categories">دسته‌بندی‌ها</a>
+          <a href="#stores">فروشگاه‌ها</a>
+          <a href="#seller">ویژه فروشندگان</a>
+        </div>
+        <a href="#seller" class="button">معرفی فروشگاه</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="eyebrow">بازار آنلاین کسب‌وکارهای ایرانی</div>
+        <h1>ایران را بگرد،<br><span>بهترین‌ها را پیدا کن</span></h1>
+        <p>
+          فروشگاه‌ها و محصولات ایرانی را در یک ویترین ببین.
+          جست‌وجو کن و کسب‌وکار موردنظرت را پیدا کن.
+        </p>
+
+        <form class="search" id="search-form">
+          <input id="search-input" type="search"
+            placeholder="نام فروشگاه یا دسته‌بندی..." aria-label="جست‌وجوی فروشگاه">
+          <button class="button primary" type="submit">جست‌وجو</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="categories">
+      <div class="container">
+        <div class="section-heading">
+          <h2>دسته‌بندی‌ها</h2>
+          <span class="muted">برای شروع انتخاب کن</span>
+        </div>
+        <div class="categories">
+          <a class="category" href="#stores" data-category="پوشاک">
+            <div class="emoji">👕</div>
+            <h3>پوشاک</h3>
+            <p>لباس و استایل</p>
+          </a>
+          <a class="category" href="#stores" data-category="دیجیتال">
+            <div class="emoji">📱</div>
+            <h3>دیجیتال</h3>
+            <p>موبایل و لوازم</p>
+          </a>
+          <a class="category" href="#stores" data-category="خانه">
+            <div class="emoji">🏠</div>
+            <h3>خانه و زندگی</h3>
+            <p>وسایل خانه</p>
+          </a>
+          <a class="category" href="#stores" data-category="زیبایی">
+            <div class="emoji">✨</div>
+            <h3>زیبایی</h3>
+            <p>مراقبت و زیبایی</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="stores">
+      <div class="container">
+        <div class="section-heading">
+          <h2>فروشگاه‌های ویترین</h2>
+          <span class="muted">فروشگاه‌های تأییدشده اینجا نمایش داده می‌شوند</span>
+        </div>
+        <div class="stores" id="store-list">
+          <div class="empty">
+            هنوز فروشگاهی ثبت نشده است.<br>
+            اولین فروشگاه می‌تواند متعلق به شما باشد.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="seller">
+      <div class="container">
+        <div class="seller">
+          <div>
+            <h2>فروشگاهت را به ایران معرفی کن</h2>
+            <p class="muted">
+              ویترین ایران برای معرفی کسب‌وکارهای ایرانی ساخته می‌شود.
+            </p>
+          </div>
+          <a class="button primary" href="mailto:info@vitrin-iran.example">
+            تماس برای همکاری
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <span>© ویترین ایران — تمامی حقوق محفوظ است.</span>
+      <span>ساخته‌شده برای کسب‌وکارهای ایرانی</span>
+    </div>
+  </footer>
+
+  <script>
+    const searchForm = document.getElementById('search-form');
+    const searchInput = document.getElementById('search-input');
+    const storeList = document.getElementById('store-list');
+
+    searchForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      const query = searchInput.value.trim();
+
+      if (!query) {
+        searchInput.focus();
+        return;
+      }
+
+      const empty = storeList.querySelector('.empty');
+      if (empty) {
+        empty.textContent =
+          'فروشگاهی برای «' + query +
+          '» ثبت نشده است. با اضافه‌شدن فروشگاه‌ها می‌توانی جست‌وجو کنی.';
+      } else {
+        const cards = [...storeList.querySelectorAll('.store')];
+        let count = 0;
+
+        cards.forEach(function (card) {
+          const matches = card.textContent.includes(query);
+          card.hidden = !matches;
+          if (matches) count++;
+        });
+
+        if (!count) {
+          storeList.innerHTML =
+            '<div class="empty">نتیجه‌ای برای «' +
+            query.replace(/[&<>"']/g, '') +
+            '» پیدا نشد.</div>';
+        }
+      }
+    });
+
+    document.querySelectorAll('[data-category]').forEach(function (item) {
+      item.addEventListener('click', function () {
+        searchInput.value = item.dataset.category;
+      });
+    });
+  </script>
+</body>
+</html>
