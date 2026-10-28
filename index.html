@@ -4,399 +4,609 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080b09">
-  <meta name="description" content="ویترین ایران؛ بستری برای معرفی فروشگاه‌ها و محصولات ایرانی">
-  <title>ویترین ایران | بازار آنلاین ایران</title>
+  <meta name="theme-color" content="#0b0b0b">
+  <title>ویترین ایران | بازار لوکس ایرانی</title>
   <style>
     :root {
-      --bg: #080b09;
-      --panel: #111713;
-      --green: #39ff88;
-      --text: #f4fff7;
-      --muted: #a0afa5;
-      --border: #26382d;
+      --bg: #0b0b0b;
+      --panel: #151515;
+      --gold: #d6b46a;
+      --gold-light: #f3dfaa;
+      --text: #f7f4ed;
+      --muted: #b8b3a8;
+      --border: #393126;
     }
 
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: Tahoma, Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
+      font-family: Tahoma, Arial, sans-serif;
+      font-size: 14px;
       line-height: 1.9;
     }
 
-    a { color: inherit; text-decoration: none; }
-
-    .container {
-      width: min(1120px, 92%);
-      margin: auto;
-    }
-
-    header {
-      border-bottom: 1px solid var(--border);
-      background: rgba(8, 11, 9, .95);
-    }
-
-    nav {
-      min-height: 78px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      flex-wrap: wrap;
-      padding: 12px 0;
-    }
-
-    .logo {
-      color: var(--green);
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    .logo small {
-      display: block;
-      font-size: 10px;
-      letter-spacing: 3px;
-      color: var(--muted);
-      direction: ltr;
-      text-align: right;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .nav-links a:hover { color: var(--green); }
-
-    .button {
-      display: inline-block;
-      border: 1px solid var(--green);
-      padding: 9px 17px;
-      border-radius: 9px;
-      color: var(--green);
-      background: transparent;
-      cursor: pointer;
+    button, input, select, textarea {
       font: inherit;
     }
 
-    .button.primary {
-      color: #061109;
-      background: var(--green);
-      font-weight: bold;
-    }
+    button, a { -webkit-tap-highlight-color: transparent; }
 
-    .hero {
-      text-align: center;
-      padding: 85px 0 65px;
+    a { color: inherit; text-decoration: none; }
+
+    .intro {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
       background:
-        radial-gradient(ellipse at 50% 0%, #143522 0%, transparent 65%);
+        radial-gradient(ellipse at center, #302416 0%, #11100e 38%, #050505 78%);
+      transition: opacity .8s ease, visibility .8s ease;
     }
 
-    .eyebrow {
-      color: var(--green);
-      font-size: 13px;
+    .intro::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px solid #a8894c;
+      pointer-events: none;
+    }
+
+    .intro-logo {
+      color: var(--gold-light);
+      font-size: clamp(26px, 6vw, 43px);
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-align: center;
+      animation: reveal 2s ease both;
+    }
+
+    .intro-line {
+      width: 100px;
+      height: 2px;
+      margin-top: 18px;
+      background: var(--gold);
+      animation: expand 2s ease both;
+    }
+
+    .intro-caption {
+      color: #d0c5ad;
+      margin-top: 14px;
+      font-size: 12px;
       letter-spacing: 2px;
     }
 
-    h1 {
-      font-size: clamp(32px, 6vw, 58px);
-      line-height: 1.5;
-      margin: 15px 0;
+    .intro.hide {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
     }
 
-    h1 span { color: var(--green); }
-
-    .hero p {
-      color: var(--muted);
-      max-width: 620px;
-      margin: 0 auto 28px;
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .search {
-      display: flex;
-      gap: 10px;
-      max-width: 650px;
-      margin: 30px auto 0;
+    @keyframes expand {
+      from { width: 0; }
+      to { width: 100px; }
     }
 
-    input, select {
-      min-width: 0;
-      width: 100%;
-      padding: 14px;
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      background: var(--panel);
-      color: var(--text);
-      font: inherit;
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(11, 11, 11, .96);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
     }
 
-    section { padding: 48px 0; }
-
-    .section-heading {
+    .topbar {
+      max-width: 1150px;
+      margin: auto;
+      padding: 12px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 15px;
-      margin-bottom: 22px;
-      flex-wrap: wrap;
+      gap: 16px;
     }
 
-    h2 { margin: 0; font-size: 25px; }
+    .brand {
+      color: var(--gold);
+      font-size: 20px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
 
-    .muted { color: var(--muted); }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 17px;
+      font-size: 13px;
+    }
 
-    .categories, .stores {
+    nav a:hover { color: var(--gold); }
+
+    .gold-btn {
+      display: inline-block;
+      border: 1px solid var(--gold);
+      border-radius: 7px;
+      padding: 8px 15px;
+      background: var(--gold);
+      color: #17120a;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .gold-btn:hover { background: var(--gold-light); }
+
+    .outline-btn {
+      display: inline-block;
+      border: 1px solid var(--gold);
+      border-radius: 7px;
+      padding: 8px 15px;
+      background: transparent;
+      color: var(--gold-light);
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .hero {
+      max-width: 1150px;
+      min-height: 355px;
+      margin: auto;
+      padding: 60px 24px;
+      display: flex;
+      align-items: center;
+      background:
+        radial-gradient(ellipse at 18% 35%, #3b2d17 0%, transparent 42%);
+    }
+
+    .hero-content { max-width: 570px; }
+
+    .eyebrow {
+      color: var(--gold);
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      margin: 12px 0;
+      font-size: clamp(25px, 4vw, 36px);
+      line-height: 1.8;
+      font-weight: 600;
+    }
+
+    h1 span, .gold { color: var(--gold); }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 490px;
+      font-size: 14px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .container {
+      width: min(1100px, 100%);
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 19px;
+      font-weight: 600;
+    }
+
+    .section-head p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .category {
+      text-align: center;
+      padding: 18px 8px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      transition: .2s;
+    }
+
+    .category:hover, .product:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .category .symbol {
+      display: block;
+      font-size: 25px;
+      color: var(--gold);
+      margin-bottom: 5px;
+    }
+
+    .category strong { font-size: 13px; font-weight: 500; }
+
+    .products {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 15px;
     }
 
-    .category, .store {
+    .product {
+      overflow: hidden;
       background: var(--panel);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 22px;
+      border-radius: 10px;
       transition: .2s;
     }
 
-    .category:hover, .store:hover {
-      border-color: var(--green);
-      transform: translateY(-3px);
+    .product-art {
+      min-height: 145px;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(ellipse at center, #44351e, #1a1712 68%, #111);
+      color: var(--gold);
+      font-size: 43px;
     }
 
-    .category .emoji { font-size: 30px; }
+    .product-info { padding: 13px; }
 
-    .category h3, .store h3 {
-      margin: 8px 0 3px;
-      font-size: 17px;
+    .product h3 {
+      margin: 0 0 6px;
+      font-size: 14px;
+      font-weight: 500;
     }
 
-    .category p, .store p {
+    .product p {
+      margin: 0 0 12px;
       color: var(--muted);
-      margin: 0;
+      font-size: 12px;
+    }
+
+    .price {
+      color: var(--gold-light);
+      font-weight: bold;
       font-size: 13px;
     }
 
-    .store-symbol {
-      display: grid;
-      place-items: center;
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: #193523;
-      color: var(--green);
-      font-size: 23px;
+    .product .outline-btn {
+      width: 100%;
+      margin-top: 12px;
     }
 
-    .empty {
-      grid-column: 1 / -1;
-      text-align: center;
-      color: var(--muted);
-      padding: 35px;
-      border: 1px dashed var(--border);
-      border-radius: 12px;
-    }
-
-    .seller {
-      padding: 32px;
+    .car-banner {
       border: 1px solid var(--border);
-      border-radius: 18px;
-      background: linear-gradient(110deg, #112419, #101511);
+      border-radius: 12px;
+      padding: 28px;
+      background:
+        radial-gradient(ellipse at 80% 50%, #3b2d17, #15130f 65%);
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 20px;
-      flex-wrap: wrap;
     }
 
-    .seller h2 { margin-bottom: 8px; }
+    .car-banner h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      font-weight: 600;
+    }
 
-    footer {
-      border-top: 1px solid var(--border);
-      margin-top: 35px;
-      padding: 25px 0;
+    .car-banner p {
       color: var(--muted);
       font-size: 13px;
     }
 
-    .footer-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-      flex-wrap: wrap;
+    .car-symbol { font-size: 58px; }
+
+    .form-panel {
+      max-width: 650px;
+      margin: auto;
+      padding: 22px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .form-panel h2 {
+      margin-top: 0;
+      font-size: 19px;
+      font-weight: 600;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 13px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #e3d9c5;
+      font-size: 13px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      background: #0c0c0c;
+      color: white;
+      border: 1px solid #494032;
+      border-radius: 7px;
+      outline: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--gold);
+    }
+
+    .field { margin-bottom: 13px; }
+
+    .form-panel button { margin-top: 5px; }
+
+    .notice {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 12px;
+    }
+
+    footer {
+      margin-top: 35px;
+      padding: 27px 20px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    footer strong {
+      display: block;
+      color: var(--gold);
+      font-size: 17px;
+      margin-bottom: 5px;
     }
 
     @media (max-width: 760px) {
-      .categories, .stores {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .search { flex-direction: column; }
-      .hero { padding-top: 55px; }
-      .nav-links { gap: 12px; }
+      .topbar { flex-wrap: wrap; }
+      nav { order: 3; width: 100%; gap: 13px; }
+      .categories { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero { min-height: 310px; padding: 42px 20px; }
+      .car-banner { padding: 20px; }
+      .car-symbol { font-size: 42px; }
     }
 
-    @media (max-width: 380px) {
-      .categories, .stores {
-        grid-template-columns: 1fr;
+    @media (max-width: 420px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .brand { font-size: 18px; }
+      nav { font-size: 12px; }
+      .product-art { min-height: 120px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
       }
     }
   </style>
 </head>
 <body>
+
+  <div class="intro" id="intro" aria-label="ویترین ایران">
+    <div class="intro-logo">ویترین ایران</div>
+    <div class="intro-line"></div>
+    <div class="intro-caption">بازار لوکس ایرانی</div>
+  </div>
+
   <header>
-    <div class="container">
-      <nav>
-        <a href="#" class="logo">
-          ویترین ایران
-          <small>VITRIN IRAN</small>
-        </a>
-        <div class="nav-links">
-          <a href="#categories">دسته‌بندی‌ها</a>
-          <a href="#stores">فروشگاه‌ها</a>
-          <a href="#seller">ویژه فروشندگان</a>
-        </div>
-        <a href="#seller" class="button">معرفی فروشگاه</a>
+    <div class="topbar">
+      <a class="brand" href="#home">ویترین ایران</a>
+      <nav aria-label="منوی اصلی">
+        <a href="#home">صفحه اصلی</a>
+        <a href="#categories">دسته‌بندی‌ها</a>
+        <a href="#products">محصولات</a>
+        <a href="#cars">اتومبیل</a>
+        <a href="#register">ثبت فروشگاه</a>
       </nav>
+      <a class="gold-btn" href="#register">فروشنده شوید</a>
     </div>
   </header>
 
   <main>
-    <section class="hero">
-      <div class="container">
-        <div class="eyebrow">بازار آنلاین کسب‌وکارهای ایرانی</div>
-        <h1>ایران را بگرد،<br><span>بهترین‌ها را پیدا کن</span></h1>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <div class="eyebrow">یک تجربه متفاوت از خرید ایرانی</div>
+        <h1>دنیای خرید شما،<br><span>در ویترین ایران</span></h1>
         <p>
-          فروشگاه‌ها و محصولات ایرانی را در یک ویترین ببین.
-          جست‌وجو کن و کسب‌وکار موردنظرت را پیدا کن.
+          محصولات متنوع، فروشگاه‌های ایرانی و انتخاب‌های جذاب؛
+          همه در یک بازار آنلاین با طراحی لوکس و مدرن.
         </p>
-
-        <form class="search" id="search-form">
-          <input id="search-input" type="search"
-            placeholder="نام فروشگاه یا دسته‌بندی..." aria-label="جست‌وجوی فروشگاه">
-          <button class="button primary" type="submit">جست‌وجو</button>
-        </form>
+        <div class="hero-actions">
+          <a class="gold-btn" href="#products">مشاهده محصولات</a>
+          <a class="outline-btn" href="#register">ثبت فروشگاه من</a>
+        </div>
       </div>
     </section>
 
-    <section id="categories">
-      <div class="container">
-        <div class="section-heading">
+    <section class="container" id="categories">
+      <div class="section-head">
+        <div>
           <h2>دسته‌بندی‌ها</h2>
-          <span class="muted">برای شروع انتخاب کن</span>
+          <p>دنیای انتخاب‌های شما</p>
         </div>
-        <div class="categories">
-          <a class="category" href="#stores" data-category="پوشاک">
-            <div class="emoji">👕</div>
-            <h3>پوشاک</h3>
-            <p>لباس و استایل</p>
-          </a>
-          <a class="category" href="#stores" data-category="دیجیتال">
-            <div class="emoji">📱</div>
-            <h3>دیجیتال</h3>
-            <p>موبایل و لوازم</p>
-          </a>
-          <a class="category" href="#stores" data-category="خانه">
-            <div class="emoji">🏠</div>
-            <h3>خانه و زندگی</h3>
-            <p>وسایل خانه</p>
-          </a>
-          <a class="category" href="#stores" data-category="زیبایی">
-            <div class="emoji">✨</div>
-            <h3>زیبایی</h3>
-            <p>مراقبت و زیبایی</p>
-          </a>
-        </div>
+      </div>
+      <div class="categories">
+        <a class="category" href="#products">
+          <span class="symbol">◈</span><strong>پوشاک</strong>
+        </a>
+        <a class="category" href="#products">
+          <span class="symbol">◇</span><strong>زیبایی</strong>
+        </a>
+        <a class="category" href="#products">
+          <span class="symbol">⌂</span><strong>خانه و زندگی</strong>
+        </a>
+        <a class="category" href="#products">
+          <span class="symbol">✧</span><strong>دیجیتال</strong>
+        </a>
+        <a class="category" href="#cars">
+          <span class="symbol">🚘</span><strong>اتومبیل</strong>
+        </a>
       </div>
     </section>
 
-    <section id="stores">
-      <div class="container">
-        <div class="section-heading">
-          <h2>فروشگاه‌های ویترین</h2>
-          <span class="muted">فروشگاه‌های تأییدشده اینجا نمایش داده می‌شوند</span>
+    <section class="container" id="products">
+      <div class="section-head">
+        <div>
+          <h2>ویترین محصولات</h2>
+          <p>نمونه‌ای از محصولات قابل نمایش در فروشگاه</p>
         </div>
-        <div class="stores" id="store-list">
-          <div class="empty">
-            هنوز فروشگاهی ثبت نشده است.<br>
-            اولین فروشگاه می‌تواند متعلق به شما باشد.
+      </div>
+      <div class="products">
+        <article class="product">
+          <div class="product-art">◇</div>
+          <div class="product-info">
+            <h3>پوشاک و استایل</h3>
+            <p>انتخابی برای سلیقه شما</p>
+            <div class="price">قیمت در فروشگاه</div>
+            <button class="outline-btn" type="button" onclick="showDemo()">مشاهده جزئیات</button>
           </div>
+        </article>
+        <article class="product">
+          <div class="product-art">✧</div>
+          <div class="product-info">
+            <h3>زیبایی و مراقبت</h3>
+            <p>محصولات متنوع</p>
+            <div class="price">قیمت در فروشگاه</div>
+            <button class="outline-btn" type="button" onclick="showDemo()">مشاهده جزئیات</button>
+          </div>
+        </article>
+        <article class="product">
+          <div class="product-art">⌂</div>
+          <div class="product-info">
+            <h3>خانه و دکوراسیون</h3>
+            <p>برای خانه‌ای دلنشین</p>
+            <div class="price">قیمت در فروشگاه</div>
+            <button class="outline-btn" type="button" onclick="showDemo()">مشاهده جزئیات</button>
+          </div>
+        </article>
+        <article class="product">
+          <div class="product-art">◈</div>
+          <div class="product-info">
+            <h3>لوازم دیجیتال</h3>
+            <p>دنیای فناوری</p>
+            <div class="price">قیمت در فروشگاه</div>
+            <button class="outline-btn" type="button" onclick="showDemo()">مشاهده جزئیات</button>
+          </div>
+        </article>
+      </div>
+      <p class="notice">این موارد نمونه نمایشی هستند؛ هنوز محصول واقعی یا قیمت فروشنده ثبت نشده است.</p>
+    </section>
+
+    <section class="container" id="cars">
+      <div class="car-banner">
+        <div>
+          <div class="eyebrow">ویترین خودرو</div>
+          <h2>دنیای اتومبیل در ویترین ایران</h2>
+          <p>محلی برای معرفی خودروها و آگهی‌های فروش.</p>
+          <button class="gold-btn" type="button" onclick="showDemo()">مشاهده خودروها</button>
         </div>
+        <div class="car-symbol" aria-hidden="true">🚘</div>
       </div>
     </section>
 
-    <section id="seller">
-      <div class="container">
-        <div class="seller">
-          <div>
-            <h2>فروشگاهت را به ایران معرفی کن</h2>
-            <p class="muted">
-              ویترین ایران برای معرفی کسب‌وکارهای ایرانی ساخته می‌شود.
-            </p>
+    <section class="container" id="register">
+      <div class="form-panel">
+        <h2>درخواست ثبت فروشگاه</h2>
+        <p class="notice">اطلاعات فروشگاهت را وارد کن. این فرم در نسخه فعلی آزمایشی است.</p>
+        <form id="storeForm">
+          <div class="form-grid">
+            <div class="field">
+              <label for="owner">نام و نام خانوادگی</label>
+              <input id="owner" name="owner" required maxlength="100" placeholder="نام شما">
+            </div>
+            <div class="field">
+              <label for="store">نام فروشگاه</label>
+              <input id="store" name="store" required maxlength="100" placeholder="نام فروشگاه">
+            </div>
+            <div class="field">
+              <label for="phone">شماره تماس</label>
+              <input id="phone" name="phone" required type="tel" maxlength="20" placeholder="شماره تماس">
+            </div>
+            <div class="field">
+              <label for="kind">نوع فروشگاه</label>
+              <select id="kind" name="kind" required>
+                <option value="">انتخاب کنید</option>
+                <option>پوشاک</option>
+                <option>زیبایی</option>
+                <option>خانه و زندگی</option>
+                <option>دیجیتال</option>
+                <option>اتومبیل</option>
+                <option>سایر</option>
+              </select>
+            </div>
           </div>
-          <a class="button primary" href="mailto:info@vitrin-iran.example">
-            تماس برای همکاری
-          </a>
-        </div>
+          <div class="field">
+            <label for="description">توضیحات</label>
+            <textarea id="description" name="description" rows="3" maxlength="500" placeholder="درباره فروشگاه خود بنویسید"></textarea>
+          </div>
+          <button class="gold-btn" type="submit">ثبت درخواست آزمایشی</button>
+          <p id="formMessage" class="notice" role="status"></p>
+        </form>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="container footer-row">
-      <span>© ویترین ایران — تمامی حقوق محفوظ است.</span>
-      <span>ساخته‌شده برای کسب‌وکارهای ایرانی</span>
-    </div>
+    <strong>ویترین ایران</strong>
+    بازار آنلاین فروشگاه‌ها و محصولات ایرانی
+    <p>© ویترین ایران</p>
   </footer>
 
   <script>
-    const searchForm = document.getElementById('search-form');
-    const searchInput = document.getElementById('search-input');
-    const storeList = document.getElementById('store-list');
-
-    searchForm.addEventListener('submit', function (event) {
-      event.preventDefault();
-      const query = searchInput.value.trim();
-
-      if (!query) {
-        searchInput.focus();
-        return;
-      }
-
-      const empty = storeList.querySelector('.empty');
-      if (empty) {
-        empty.textContent =
-          'فروشگاهی برای «' + query +
-          '» ثبت نشده است. با اضافه‌شدن فروشگاه‌ها می‌توانی جست‌وجو کنی.';
-      } else {
-        const cards = [...storeList.querySelectorAll('.store')];
-        let count = 0;
-
-        cards.forEach(function (card) {
-          const matches = card.textContent.includes(query);
-          card.hidden = !matches;
-          if (matches) count++;
-        });
-
-        if (!count) {
-          storeList.innerHTML =
-            '<div class="empty">نتیجه‌ای برای «' +
-            query.replace(/[&<>"']/g, '') +
-            '» پیدا نشد.</div>';
-        }
-      }
+    window.addEventListener("DOMContentLoaded", function () {
+      window.setTimeout(function () {
+        document.getElementById("intro").classList.add("hide");
+      }, 8000);
     });
 
-    document.querySelectorAll('[data-category]').forEach(function (item) {
-      item.addEventListener('click', function () {
-        searchInput.value = item.dataset.category;
-      });
+    function showDemo() {
+      alert("این بخش فعلاً نمایشی است و پس از اتصال به سامانه اصلی فعال می‌شود.");
+    }
+
+    document.getElementById("storeForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+      document.getElementById("formMessage").textContent =
+        "این فرم نمایشی است؛ اطلاعات هنوز ذخیره یا ارسال نشده‌اند.";
     });
   </script>
 </body>
